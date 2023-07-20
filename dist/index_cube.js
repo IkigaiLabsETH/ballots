@@ -236,7 +236,7 @@
       for (var i = 0; i < grid.length; i++) {
         grid[i] = new Array(this.xdim + 1);
         for (var j = 0; j < grid[i].length; j++) {
-          if (i == 0 || j == 0) grid[i][j] = { h: false, v: false, in: false, col: null, el: null };
+          if (i == 0 || j == 0) grid[i][j] = { h: false, v: false, in: false, col: null };
           else if (i == 1 && initial_top != null) grid[i][j] = { ...initial_top[j], h: true };
           else if (j == 1 && initial_left != null) grid[i][j] = { ...initial_left[i], v: true };
           else if (this.h_symmetric && j > grid[i].length / 2) {
@@ -282,48 +282,48 @@
 
       function block_set_1(x, y) {
         if (start_new_from_blank(x, y)) return new_block(x, y);
-        return { v: false, h: false, in: false, col: null, el: null, id: null };
+        return { v: false, h: false, in: false, col: null, id: null };
       }
 
       function block_set_2(x, y) {
         if (start_new_from_blank(x, y)) return new_block(x, y);
-        return { v: true, h: false, in: false, col: null, el: null, id: null };
+        return { v: true, h: false, in: false, col: null, id: null };
       }
 
       function block_set_3(x, y) {
-        if (extend(x, y)) return { v: false, h: true, in: true, col: left.col, el: left.el, id: left.id };
+        if (extend(x, y)) return { v: false, h: true, in: true, col: left.col, id: left.id };
         return block_set_2(x, y);
       }
 
       function block_set_4(x, y) {
         if (start_new_from_blank(x, y)) return new_block(x, y);
-        return { v: false, h: true, in: false, col: null, el: null, id: null };
+        return { v: false, h: true, in: false, col: null, id: null };
       }
 
       function block_set_5(x, y) {
-        if (extend(x, y)) return { v: true, h: false, in: true, col: top.col, el: top.el, id: top.id };
+        if (extend(x, y)) return { v: true, h: false, in: true, col: top.col, id: top.id };
         return block_set_4(x, y);
       }
 
       function block_set_6() {
-        return { v: false, h: false, in: true, col: left.col, el: left.el, id: left.id };
+        return { v: false, h: false, in: true, col: left.col, id: left.id };
       }
 
       function block_set_7(x, y) {
-        if (extend(x, y)) return { v: false, h: true, in: true, col: left.col, el: left.el, id: left.id };
+        if (extend(x, y)) return { v: false, h: true, in: true, col: left.col, id: left.id };
         if (start_new(x, y)) return new_block(x, y);
-        return { v: true, h: true, in: false, col: null, el: null, id: null };
+        return { v: true, h: true, in: false, col: null, id: null };
       }
 
       function block_set_8(x, y) {
-        if (extend(x, y)) return { v: true, h: false, in: true, col: top.col, el: top.el, id: top.id };
+        if (extend(x, y)) return { v: true, h: false, in: true, col: top.col, id: top.id };
         if (start_new(x, y)) return new_block(x, y);
-        return { v: true, h: true, in: false, col: null, el: null, id: null };
+        return { v: true, h: true, in: false, col: null, id: null };
       }
 
       function block_set_9(x, y) {
-        if (vertical_dir(x, y)) return { v: true, h: false, in: true, col: top.col, el: top.el, id: top.id };
-        return { v: false, h: true, in: true, col: left.col, el: left.el, id: left.id };
+        if (vertical_dir(x, y)) return { v: true, h: false, in: true, col: top.col, id: top.id };
+        return { v: false, h: true, in: true, col: left.col, id: left.id };
       }
 
       // ---- Blocks ----
@@ -345,7 +345,7 @@
           col = context.main_color;
         }
 
-        return { v: true, h: true, in: true, col: col, el: context.noise(), id: context.id_counter++ };
+        return { v: true, h: true, in: true, col: col, id: context.id_counter++ };
       }
 
       // ---- Decisions ----
@@ -413,10 +413,9 @@
     for (let i = 0; i < grid.length; i++) {
       for (let j = 0; j < grid[i].length; j++) {
         let cell = grid[i][j];
-        if (cell.h && cell.v && cell.in) nw_corners.push({ x1: j, y1: i, col: cell.col, el: cell.el, id: cell.id });
+        if (cell.h && cell.v && cell.in) nw_corners.push({ x1: j, y1: i, col: cell.col, id: cell.id });
       }
     }
-    
     return nw_corners;
   }
 
@@ -1099,6 +1098,12 @@
       background: '#eee3d3',
     },
     {
+      name: 'dt02b',
+      colors: ['#eee3d3'],
+      stroke: '#302956',
+      background: '#f3c507',
+    },
+    {
       name: 'dt03',
       colors: ['#000000', '#a7a7a7'],
       stroke: '#000000',
@@ -1145,6 +1150,24 @@
       colors: ['#e5dfcf', '#151513'],
       stroke: '#151513',
       background: '#e9b500',
+    },
+    {
+      name: 'dt11',
+      colors: ['#ece9e2'],
+      stroke: '#221e1f',
+      background: '#75c4bf',
+    },
+    {
+      name: 'dt12',
+      colors: ['#f5f2d3'],
+      stroke: '#073c5c',
+      background: '#c0d0c3',
+    },
+    {
+      name: 'dt13',
+      colors: ['#f5f2d3', '#f5f2d3', '#fbd6b8'],
+      stroke: '#ec5525',
+      background: '#ec5525',
     },
   ];
 
